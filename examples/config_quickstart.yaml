@@ -1,0 +1,35 @@
+target_name: "il6_receptor"
+target_pdb: "examples/target_il6.pdb"
+
+generate:
+  backend: "stub"
+  n_designs: 3
+  seed: 42
+  stub_dir: "examples/backbones"
+
+design:
+  backend: "stub"
+  n_seqs_per_backbone: 2
+  temperature: 0.1
+  seed: 42
+  stub_dir: "examples/sequences"
+
+fold:
+  backend: "stub"
+  stub_dir: "examples/structures"
+
+filter:
+  rmsd_threshold: 2.0
+  plddt_threshold: 70.0
+  min_binder_length: 50
+  max_binder_length: 150
+
+score:
+  contact_distance: 8.0
+  min_interface_contacts: 10
+
+output:
+  output_dir: "output"
+  scoreboard_format: "parquet"
+  save_passing_structures: true
+  plot_success_rate: true

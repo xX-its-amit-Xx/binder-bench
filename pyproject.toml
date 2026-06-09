@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "binder-bench"
+version = "0.1.0"
+description = "Reproducible benchmark harness for de novo protein-binder design"
+readme = "README.md"
+license = { text = "GPL-3.0-only" }
+authors = [{ name = "binder-bench contributors" }]
+requires-python = ">=3.11"
+keywords = ["protein design", "binder", "benchmark", "bioinformatics", "structural biology"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "biopython>=1.83",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "typer[all]>=0.12",
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "requests>=2.31",
+    "tqdm>=4.66",
+    "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+gpu = ["torch>=2.2"]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+binder-bench = "binder_bench.cli:app"
+
+[project.urls]
+Repository = "https://github.com/binder-bench/binder-bench"
+Documentation = "https://binder-bench.readthedocs.io"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["binder_bench*"]
+
+[tool.setuptools.package-data]
+binder_bench = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
